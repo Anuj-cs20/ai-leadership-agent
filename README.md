@@ -40,7 +40,7 @@ export OPENAI_API_KEY="sk-..."
 jupyter notebook notebook.ipynb
 ```
 
-> **That's it.** No Docker, no Ollama, no local model downloads. The notebook ingests sample documents, runs queries, and produces structured NL reports with charts — all in one place.
+> No additional infrastructure required. The notebook ingests sample documents, runs queries, and produces structured NL reports with charts — all in one place.
 
 ---
 
@@ -52,27 +52,27 @@ jupyter notebook notebook.ipynb
 | **`data/sample/`** | 3-5 sample company documents (public SEC filings + synthetic internal docs) |
 | **`data/evaluation/`** | Validation Q&A set with expected answers |
 | **`src/`** | Modular Python source code for all pipeline components |
-| **`config.yaml`** | Single config file — just set your model name and API key |
-| **`requirements.txt`** | All dependencies, installable via pip |
-| **Output dumps** | Sample NL outputs rendered in the notebook (structured reports, evidence, charts) |
+| **`config.yaml`** | Single configuration file for model and API key settings |
+| **`requirements.txt`** | All dependencies, installable via `pip` |
+| **Output dumps** | Pre-generated sample outputs (structured reports, evidence, charts) |
 
 ---
 
 ## Architecture Decisions
 
-| Dimension | Choice | Rationale |
-|---|---|---|
-| **Document Formats** | PDF, DOCX, PPTX, XLSX/CSV, MD/TXT | Covers all typical corporate document types |
-| **Document Parsing** | `unstructured` | Unified API for all formats; preserves tables, headers, lists |
-| **Chunking Strategy** | Recursive text splitting + table-aware | Simple, effective; keeps tables as atomic units |
-| **Embedding Model** | OpenAI `text-embedding-3-small` (1536d) | High quality, no local GPU needed, easy setup |
-| **Vector Database** | ChromaDB (in-process) | `pip install` only — no Docker, no server, zero infra |
-| **LLM** | OpenAI `gpt-4o-mini` (configurable) | Excellent cost/quality for RAG; reviewer can swap to `gpt-4o` in config |
-| **RAG Pattern** | Query rewriting + vector retrieval + structured generation | Clean, effective pipeline without over-engineering |
-| **Framework** | LangChain (document loaders + splitters + retrieval) | Mature ecosystem, great for RAG pipelines |
-| **Interface** | Jupyter Notebook | Per submission guidelines — "a notebook should be a good submission" |
-| **Output** | Structured NL report + source citations + Plotly charts | Leadership-grade output: summary, evidence quotes, source traceability, visualizations |
-| **Sample Data** | Public SEC filings + synthetic internal docs | Realistic, reproducible, included in repo |
+| Dimension | Choice | Why | Rationale |
+|---|---|---|---|
+| **Document Formats** | PDF, DOCX, PPTX, XLSX/CSV, MD/TXT | Standard corporate formats | Covers all typical organizational document types |
+| **Document Parsing** | `unstructured` | Single library for all formats | Unified API; preserves tables, headers, and lists across formats |
+| **Chunking Strategy** | Recursive text splitting + table-aware | Reliable, well-tested approach | Effective for mixed content; keeps tables as atomic units |
+| **Embedding Model** | OpenAI `text-embedding-3-small` (1536d) | No local GPU, consistent quality | High-quality embeddings with minimal setup |
+| **Vector Database** | ChromaDB (in-process) | Zero infrastructure | Runs in-process via `pip install`; no Docker or external server |
+| **LLM** | OpenAI `gpt-4o-mini` (configurable) | Best cost/quality ratio for RAG | Configurable — swap to `gpt-4o` in `config.yaml` for higher quality |
+| **RAG Pattern** | Query rewriting + vector retrieval + structured generation | Proven effective pipeline | Each stage adds measurable value without unnecessary complexity |
+| **Framework** | LangChain (document loaders + splitters + retrieval) | Mature, well-documented | Rich ecosystem of document loaders, text splitters, and retrieval abstractions |
+| **Interface** | Jupyter Notebook | Self-contained, reproducible | Single file runs the full pipeline end-to-end |
+| **Output** | Structured NL report + source citations + Plotly charts | Actionable, evidence-based | Summary, key points, evidence quotes, source traceability, and visualizations |
+| **Sample Data** | Public SEC filings + synthetic internal docs | Realistic, reproducible | Included in repo; no external downloads required |
 
 ---
 
@@ -330,14 +330,14 @@ erDiagram
 
 ```
 ai-leadership-agent/
-├── README.md                          # This file — architecture & setup
-├── notebook.ipynb                     # ★ Main deliverable — end-to-end demo
+├── README.md                          # Architecture & setup documentation
+├── notebook.ipynb                     # ★ End-to-end demo notebook
 ├── config.yaml                        # Model name + API key config
 ├── requirements.txt                   # Python dependencies (pip install only)
 │
 ├── data/
 │   ├── sample/                        # Included sample documents for demo
-│   │   ├── annual_report_2024.pdf     # Public SEC filing (or synthetic)
+│   │   ├── annual_report_2024.pdf     # Public SEC filing
 │   │   ├── q3_quarterly_report.pdf    # Quarterly performance data
 │   │   ├── strategy_notes.docx        # Internal strategy document
 │   │   ├── kpi_dashboard.xlsx         # Financial KPI data
@@ -379,7 +379,7 @@ ai-leadership-agent/
 ## Configuration
 
 ```yaml
-# config.yaml — the only file you need to touch
+# config.yaml
 
 llm:
   model: "gpt-4o-mini"                # or "gpt-4o" for best quality
@@ -395,16 +395,16 @@ retrieval:
 
 chromadb:
   collection: "company_docs"
-  persist_directory: "./chroma_db"     # local storage, no server needed
+  persist_directory: "./chroma_db"     # local persistent storage
 ```
 
-> **API key:** Set via environment variable `OPENAI_API_KEY`. The reviewer can use their own key — no credentials are stored in the repo.
+> **API key:** Set via environment variable `OPENAI_API_KEY`. No credentials are stored in the repo.
 
 ---
 
 ## Sample Questions & Expected Outputs
 
-These are the sample questions from the problem statement. The notebook will run all of these and produce full NL output reports.
+The notebook runs these queries and produces full structured reports with charts.
 
 | # | Question | Expected Output Type |
 |---|----------|---------------------|
@@ -412,7 +412,7 @@ These are the sample questions from the problem statement. The notebook will run
 | 2 | "Which departments are underperforming?" | Comparative analysis + bar chart |
 | 3 | "What were the key risks highlighted in the last quarter?" | Summary with evidence quotes |
 
-### Example Output Format (rendered in notebook)
+### Example Output Format
 
 ```
 📊 LEADERSHIP INSIGHT REPORT
@@ -463,7 +463,7 @@ The notebook includes a validation section that runs the system against a curate
 1. **Documents are text-extractable** — no scanned/OCR PDFs
 2. **Document scale: 10-50 documents**, up to 200 pages each
 3. **English-only** documents and queries
-4. **OpenAI API access** — reviewer has an API key (model name is configurable in `config.yaml`)
+4. **OpenAI API access** — a valid API key is required (model is configurable in `config.yaml`)
 5. **No Docker or GPU required** — everything runs with `pip install` + API key
 6. **Single-user system** — no concurrency considerations
 7. **No real-time data** — documents are ingested in batch
@@ -471,11 +471,9 @@ The notebook includes a validation section that runs the system against a curate
 
 ---
 
----
-
 ## Future Work — Advanced Architecture
 
-> The sections below document the **full production-grade architecture** that was designed during the planning phase. These are natural next steps to evolve the current working prototype into an enterprise system. All original architecture diagrams are preserved here.
+> The sections below document the **full production-grade architecture** — natural next steps to evolve the current prototype into an enterprise system.
 
 ### Architecture Decisions — Current vs Future
 
