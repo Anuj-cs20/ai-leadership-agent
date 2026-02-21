@@ -1,0 +1,92 @@
+{
+  "question": "What is our current revenue trend?",
+  "query_type": "trend",
+  "answer": {
+    "summary": "Adobe Inc. has demonstrated a robust revenue growth trend throughout fiscal year 2024, with quarterly revenues increasing from $42.3M in Q1 to a projected $52.4M in Q4. This reflects a consistent upward trajectory, driven primarily by the Enterprise Solutions division.",
+    "key_points": [
+      "Q1 2024 revenue was $42.3M, representing a 4.2% increase quarter-over-quarter (QoQ) and a 19.8% increase year-over-year (YoY).",
+      "Q2 2024 revenue rose to $45.1M, marking a 6.6% QoQ increase and a 21.4% YoY increase.",
+      "Q3 2024 revenue reached $48.7M, reflecting an 8.0% QoQ increase and a 24.2% YoY increase.",
+      "Q4 2024 is projected to generate $52.4M, indicating a 7.6% QoQ increase and a 26.3% YoY increase.",
+      "The FY 2024 total revenue is expected to be $188.5M, exceeding guidance of $187-190M."
+    ],
+    "evidence": [
+      {
+        "quote": "Q1 2024: $42.3M (+4.2% QoQ, +19.8% YoY)",
+        "source_document": "annual_report_2024.pdf",
+        "page_number": null,
+        "section": "Quarterly Revenue Summary"
+      },
+      {
+        "quote": "Q2 2024: $45.1M (+6.6% QoQ, +21.4% YoY)",
+        "source_document": "annual_report_2024.pdf",
+        "page_number": null,
+        "section": "Quarterly Revenue Summary"
+      },
+      {
+        "quote": "Q3 2024: $48.7M (+8.0% QoQ, +24.2% YoY)",
+        "source_document": "quarterly_review_presentation.pptx",
+        "page_number": null,
+        "section": "Q3 2024 Financial Highlights"
+      },
+      {
+        "quote": "Q4 2024: $52.4M (+7.6% QoQ, +26.3% YoY)",
+        "source_document": "annual_report_2024.pdf",
+        "page_number": null,
+        "section": "Quarterly Revenue Summary"
+      },
+      {
+        "quote": "FY 2024 Total: $188.5M (+23.0% YoY)",
+        "source_document": "annual_report_2024.pdf",
+        "page_number": null,
+        "section": "Quarterly Revenue Summary"
+      }
+    ],
+    "detailed_analysis": "The revenue trend for Adobe Inc. shows a clear acceleration in growth throughout fiscal year 2024. Starting with Q1 2024 at $42.3M, the company experienced a steady increase each quarter, culminating in a projected revenue of $52.4M for Q4 2024. This consistent growth is attributed to the strong performance of the Enterprise Solutions division, which contributed significantly to the overall revenue, accounting for 63% of Q3 revenue at $30.8M. The year-over-year growth rates also reflect a positive trajectory, with Q3 showing a 24.2% increase compared to the previous year. The overall FY 2024 revenue is on track to reach $188.5M, surpassing the initial guidance of $187-190M, indicating robust demand and effective operational strategies."
+  },
+  "sources": [
+    {
+      "document_name": "quarterly_review_presentation.pptx",
+      "document_type": "quarterly",
+      "page_number": null,
+      "section_title": "Q3 2024 Financial Highlights"
+    },
+    {
+      "document_name": "strategy_notes.docx",
+      "document_type": "strategy",
+      "page_number": null,
+      "section_title": ""
+    },
+    {
+      "document_name": "annual_report_2024.pdf",
+      "document_type": "annual",
+      "page_number": null,
+      "section_title": "Quarterly Revenue Summary"
+    },
+    {
+      "document_name": "q3_quarterly_report.pdf",
+      "document_type": "quarterly",
+      "page_number": null,
+      "section_title": ""
+    }
+  ],
+  "visualization": {
+    "chart_type": "line",
+    "title": "Quarterly Revenue Trend for FY 2024",
+    "data": {
+      "labels": [
+        "Q1 2024",
+        "Q2 2024",
+        "Q3 2024",
+        "Q4 2024"
+      ],
+      "values": [
+        42.3,
+        45.1,
+        48.7,
+        52.4
+      ]
+    },
+    "description": "This chart illustrates the quarterly revenue trend for Adobe Inc. in fiscal year 2024, showing consistent growth each quarter."
+  }
+}

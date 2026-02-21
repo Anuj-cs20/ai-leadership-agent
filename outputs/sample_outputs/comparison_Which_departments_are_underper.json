@@ -1,0 +1,88 @@
+{
+  "question": "Which departments are underperforming?",
+  "query_type": "comparison",
+  "answer": {
+    "summary": "The departments identified as underperforming are Marketing, Customer Support, and HR. Each of these departments has metrics significantly below target, indicating a need for immediate strategic intervention.",
+    "key_points": [
+      "Marketing scored 58/100, achieving only 72% of the MQL target, which is 28 percentage points below the target (quarterly_review_presentation.pptx).",
+      "Customer Support scored 52/100, with a CSAT of 68%, down from 82%, and an average resolution time of 7.8 hours (quarterly_review_presentation.pptx).",
+      "HR reported a turnover rate of 23%, significantly above the 15% target, indicating a talent retention crisis (quarterly_review_presentation.pptx)."
+    ],
+    "evidence": [
+      {
+        "quote": "Marketing: 58/100 \u2717 Below Target \u2014 MQL at 72% of target, paid ROI declining.",
+        "source_document": "quarterly_review_presentation.pptx",
+        "page_number": null,
+        "section": null
+      },
+      {
+        "quote": "Customer Support: 52/100 \u2717 Below Target \u2014 CSAT 68% (down from 82%), 7.8hr resolution.",
+        "source_document": "quarterly_review_presentation.pptx",
+        "page_number": null,
+        "section": null
+      },
+      {
+        "quote": "HR / People: 62/100 \u2717 Below Target \u2014 23% turnover vs. 15% target.",
+        "source_document": "quarterly_review_presentation.pptx",
+        "page_number": null,
+        "section": null
+      },
+      {
+        "quote": "Turnover crisis: 28% annualized, destroying institutional knowledge.",
+        "source_document": "strategy_notes.docx",
+        "page_number": null,
+        "section": null
+      },
+      {
+        "quote": "Employee turnover reached 23%, significantly above the 15% industry benchmark and our internal target.",
+        "source_document": "annual_report_2024.pdf",
+        "page_number": null,
+        "section": null
+      }
+    ],
+    "detailed_analysis": "The performance scores reveal critical issues across the underperforming departments. Marketing's score of 58/100 reflects a significant shortfall in lead generation, with MQLs at only 72% of the target, which has direct implications for the sales pipeline (quarterly_review_presentation.pptx). Customer Support's score of 52/100 is alarming, particularly with a CSAT score that has dropped to 68% from 82%, indicating declining customer satisfaction and increased resolution times (quarterly_review_presentation.pptx). The HR department's turnover rate of 23% is a major concern, as it exceeds the target of 15%, suggesting a talent retention crisis that could impact overall organizational performance (quarterly_review_presentation.pptx). This turnover is compounded by compensation issues, as noted in the strategy notes, where compensation is reported to be below market rates, further exacerbating retention challenges (strategy_notes.docx). Overall, these departments require immediate strategic intervention to address their performance deficits and align with organizational goals."
+  },
+  "sources": [
+    {
+      "document_name": "quarterly_review_presentation.pptx",
+      "document_type": null,
+      "page_number": null,
+      "section_title": null
+    },
+    {
+      "document_name": "strategy_notes.docx",
+      "document_type": null,
+      "page_number": null,
+      "section_title": null
+    },
+    {
+      "document_name": "annual_report_2024.pdf",
+      "document_type": null,
+      "page_number": null,
+      "section_title": null
+    }
+  ],
+  "visualization": {
+    "chart_type": "bar",
+    "title": "Department Performance Scores - Q3 2023",
+    "data": {
+      "labels": [
+        "Engineering",
+        "Sales",
+        "Marketing",
+        "Customer Support",
+        "Operations",
+        "HR / People"
+      ],
+      "values": [
+        87,
+        95,
+        58,
+        52,
+        88,
+        62
+      ]
+    },
+    "description": "Comparison of department performance scores for Q3 2023, highlighting which departments are on target, exceeding, or below target."
+  }
+}

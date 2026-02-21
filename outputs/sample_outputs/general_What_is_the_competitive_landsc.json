@@ -1,0 +1,48 @@
+{
+  "question": "What is the competitive landscape and how should we respond?",
+  "query_type": "general",
+  "answer": {
+    "summary": "Adobe faces significant competition from emerging players like CompetitorX (InsightAI) and CompetitorY (DataPulse), both of which are targeting the analytics market with distinct strategies. To maintain our competitive edge, we must accelerate our AI Analytics Platform's general availability and enhance our deployment capabilities while leveraging our security certifications as a key differentiator.",
+    "key_points": [
+      "CompetitorY (DataPulse) has gained traction with 45 mid-market customers and offers a 2-week implementation time, posing a challenge to our current 6-week timeline (strategy_notes.docx).",
+      "CompetitorX (InsightAI) is priced 20% below our list price and has 15 enterprise customers, primarily in financial services, highlighting the need for a competitive pricing review (strategy_notes.docx).",
+      "Our Enterprise Solutions segment drove 62% of revenue in FY 2024, indicating strong demand for our offerings, but we must address underperformance in Marketing and Customer Support to sustain growth (board_meeting_notes.txt)."
+    ],
+    "evidence": [
+      {
+        "quote": "CompetitorY \u2014 'DataPulse' (launched September 2024) has current traction of 45 mid-market customers and offers a 2-week implementation time.",
+        "source_document": "strategy_notes.docx",
+        "page_number": null,
+        "section": ""
+      },
+      {
+        "quote": "CompetitorX \u2014 'InsightAI' (launched August 2024) is priced 20% below our list price and has 15 enterprise customers.",
+        "source_document": "strategy_notes.docx",
+        "page_number": null,
+        "section": ""
+      },
+      {
+        "quote": "Enterprise Solutions drove 62% of revenue ($116.9M), growing 30.8% YoY.",
+        "source_document": "board_meeting_notes.txt",
+        "page_number": null,
+        "section": "AGENDA ITEM 1: FY 2024 Financial Review"
+      }
+    ],
+    "detailed_analysis": "The competitive landscape is evolving with the entry of CompetitorY (DataPulse) and CompetitorX (InsightAI), both of which are targeting the analytics market aggressively. DataPulse's focus on self-service analytics for the mid-market and its rapid implementation time of 2 weeks presents a direct challenge to our current offerings, which require 6 weeks for deployment. This necessitates our strategic response to accelerate the General Availability of our AI Analytics Platform and develop a Rapid Deployment Toolkit to match or exceed the implementation speed of our competitors. Additionally, InsightAI's pricing strategy, which is 20% below our list price, highlights the need for a competitive pricing review to ensure we remain attractive to potential customers. Our current financial performance indicates strong growth, with total revenue of $188.5M and a 23% YoY growth rate, but we must address the underperformance in Marketing and Customer Support to sustain this momentum. The Marketing department scored 58/100, indicating a need for a reset in strategy, particularly in Account-Based Marketing (ABM) investment, which is currently below industry standards. Furthermore, Customer Support's declining CSAT score and increased ticket resolution time pose risks to customer retention, with an estimated $28M renewal revenue at risk if CSAT drops below 65%. Addressing these internal challenges while responding to external competitive pressures will be crucial for Adobe's continued success."
+  },
+  "sources": [
+    {
+      "document_name": "strategy_notes.docx",
+      "document_type": null,
+      "page_number": null,
+      "section_title": null
+    },
+    {
+      "document_name": "board_meeting_notes.txt",
+      "document_type": null,
+      "page_number": null,
+      "section_title": null
+    }
+  ],
+  "visualization": null
+}

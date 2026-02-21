@@ -1,0 +1,123 @@
+ADOBE INC. — BOARD OF DIRECTORS MEETING MINUTES
+Date: October 28, 2024
+Location: Adobe HQ, Building A, Conference Room 1
+Attendees: Full Board (12 members), CEO, CFO, CTO, COO, CHRO, CMO
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AGENDA ITEM 1: FY 2024 Financial Review
+
+The CFO presented the FY 2024 financial results:
+- Total Revenue: $188.5M (23% YoY growth, exceeding guidance of 18-22%)
+- Quarterly trajectory: Q1=$42.3M, Q2=$45.1M, Q3=$48.7M, Q4=$52.4M
+- Net Income: $24.1M (up from $18.2M in FY 2023)
+- Operating Margin: 15.8% (up 1.7pp from FY 2023)
+- EBITDA: $38.4M (+28.9% YoY)
+
+The board noted accelerating quarter-over-quarter growth, with Q3 (+8.0% QoQ)
+and Q4 (+7.6% QoQ) showing the strongest sequential gains.
+
+Enterprise Solutions drove 62% of revenue ($116.9M), growing 30.8% YoY.
+SMB Products contributed 28% ($52.8M, +14.3%), and Professional Services
+contributed 10% ($18.8M, +6.2%).
+
+Resolution: The board approved the FY 2024 financial statements unanimously.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AGENDA ITEM 2: Department Performance Concerns
+
+The CEO presented the Q3 department scorecards, highlighting three areas
+of underperformance requiring board attention:
+
+A) MARKETING (Score: 58/100, Target: 80/100)
+   - Marketing-qualified leads at 72% of annual target
+   - Digital advertising ROI declined from 4.2x to 3.1x
+   - Root cause: over-reliance on paid channels, insufficient ABM investment
+   - Proposed fix: $2.4M incremental budget for ABM + content strategy reset
+   - Board discussion: Members questioned the CMO's timeline for turnaround.
+     The CMO committed to measurable improvement by Q2 2025.
+
+B) CUSTOMER SUPPORT (Score: 52/100, Target: 80/100)
+   - CSAT score declined to 68% (from 82% in Q4 2023)
+   - Average ticket resolution increased from 4.2 to 7.8 hours
+   - Team understaffed: 94 agents vs. 120 required; 28% turnover
+   - Proposed fix: Emergency hiring (25 positions), 15% pay adjustment,
+     AI triage deployment — total investment: $4.1M
+   - Board concern: Risk of customer churn if CSAT drops below 65%.
+     Estimated $28M renewal revenue at risk.
+
+C) HR / PEOPLE (Score: 62/100, Target: 80/100)
+   - Organization-wide turnover at 23% vs. 15% target
+   - Employee engagement: 3.2/5.0, down from 3.6/5.0
+   - Key drivers: compensation 8-12% below market, limited career pathing
+   - Proposed fix: Company-wide compensation review ($6.2M annual cost)
+
+The board also acknowledged strong performance from:
+- Engineering: 94% feature delivery rate (target: 90%)
+- Sales: 112% quota attainment, $312M pipeline
+- Operations: 91% efficiency, 99.94% uptime
+
+Resolution: The board approved emergency funding of $4.1M for Customer
+Support stabilization, to be drawn from the operating reserve.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AGENDA ITEM 3: Risk Review
+
+The CTO and COO presented the enterprise risk register:
+
+1. CLIENT CONCENTRATION (Severity: HIGH)
+   Top 3 clients account for 35% of total revenue ($66.0M).
+   The board expressed concern about revenue dependency.
+   Action: The CRO to present a diversification plan by January 2025.
+
+2. CYBERSECURITY (Severity: CRITICAL, Status: MITIGATED)
+   OAuth vulnerability discovered September 14, patched within 48 hours.
+   No customer data compromised. Comprehensive security overhaul planned
+   for Q1 2025 ($3.8M budget approved).
+
+3. SUPPLY CHAIN (Severity: MEDIUM)
+   Hardware delivery delays impacted 12% of on-premise deployments.
+   18 enterprise customers experienced average 6-week delays.
+   $2.1M in deferred revenue. Cloud-first strategy to mitigate.
+
+4. REGULATORY COMPLIANCE (Severity: HIGH)
+   EU Digital Services Act deadline accelerated to Q1 2025.
+   Additional $1.2M approved for compliance engineering.
+   California CPRA updates due January 2025 (80% complete).
+
+5. TALENT RETENTION (Severity: HIGH)
+   Annualized voluntary turnover at 24.8%.
+   Engineering lost 18 senior developers in Q3 alone.
+   Board directed CHRO to present retention plan within 30 days.
+
+6. COMPETITIVE THREAT (Severity: MEDIUM)
+   Two competitors launched AI analytics products in Q3.
+   CompetitorX (InsightAI): 15 enterprise customers, priced 20% below.
+   CompetitorY (DataPulse): 45 mid-market customers, easy deployment.
+
+Resolution: The board requested quarterly risk updates and approved
+the $3.8M security budget.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AGENDA ITEM 4: FY 2025 Budget Approval
+
+Total proposed investment: $30.0M
+- AI Analytics GA: $8.5M (expected $20M new revenue)
+- Customer Support Fix: $4.1M (protect $28M retention revenue)
+- Marketing Reset: $2.4M (+40% enterprise pipeline)
+- Compensation Adjustment: $6.2M (reduce turnover to 16%)
+- Security Hardening: $3.8M (regulatory compliance + trust)
+- International Launch (EU): $5.0M ($15M incremental revenue)
+
+Revenue guidance for FY 2025: $222-$230M (18-22% growth)
+
+Resolution: Budget approved with amendment that quarterly progress
+reviews will be mandatory for all six investment areas.
+
+Meeting adjourned at 4:47 PM.
+
+Respectfully submitted,
+Corporate Secretary

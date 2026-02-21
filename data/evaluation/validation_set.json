@@ -1,0 +1,99 @@
+{
+    "version": "1.0",
+    "description": "Validation set for AI Leadership Insight Agent — Adobe Inc. sample data",
+    "questions": [
+        {
+            "id": 1,
+            "question": "What is our current revenue trend?",
+            "expected_query_type": "trend",
+            "expected_topics": [
+                "revenue",
+                "quarterly growth",
+                "year-over-year",
+                "accelerating"
+            ],
+            "expected_answer_contains": [
+                "188.5",
+                "23%",
+                "Q1",
+                "Q4",
+                "42.3",
+                "52.4"
+            ],
+            "expected_sources": [
+                "annual_report_2024.pdf",
+                "q3_quarterly_report.pdf",
+                "quarterly_review_presentation.pptx"
+            ],
+            "expected_visualization": "line",
+            "notes": "Should produce a line chart showing quarterly revenue from Q1-Q4 2024. Should highlight accelerating QoQ growth and 23% YoY growth."
+        },
+        {
+            "id": 2,
+            "question": "Which departments are underperforming?",
+            "expected_query_type": "comparison",
+            "expected_topics": [
+                "Marketing",
+                "Customer Support",
+                "HR",
+                "underperforming",
+                "below target"
+            ],
+            "expected_answer_contains": [
+                "Marketing",
+                "72%",
+                "Customer Support",
+                "68%",
+                "CSAT",
+                "HR",
+                "23%",
+                "turnover"
+            ],
+            "expected_sources": [
+                "annual_report_2024.pdf",
+                "q3_quarterly_report.pdf",
+                "strategy_notes.docx",
+                "quarterly_review_presentation.pptx"
+            ],
+            "expected_visualization": "bar",
+            "notes": "Should identify Marketing (72% of MQL target), Customer Support (68% CSAT, down from 82%), and HR (23% turnover vs 15% target). Should contrast with strong performers: Engineering (94% delivery), Sales (112% quota), Operations (91% efficiency)."
+        },
+        {
+            "id": 3,
+            "question": "What were the key risks highlighted in the last quarter?",
+            "expected_query_type": "risk",
+            "expected_topics": [
+                "client concentration",
+                "cybersecurity",
+                "supply chain",
+                "regulatory",
+                "talent retention",
+                "competition"
+            ],
+            "expected_answer_contains": [
+                "35%",
+                "top 3 clients",
+                "OAuth",
+                "vulnerability",
+                "supply chain",
+                "regulatory",
+                "turnover"
+            ],
+            "expected_sources": [
+                "q3_quarterly_report.pdf",
+                "annual_report_2024.pdf",
+                "operational_update.docx",
+                "quarterly_review_presentation.pptx"
+            ],
+            "expected_visualization": null,
+            "notes": "Should identify: (1) Client concentration — 35% revenue from top 3, (2) Cybersecurity — OAuth vulnerability, (3) Supply chain delays — 18 customers impacted, (4) Regulatory — EU DSA deadline accelerated, (5) Talent retention — 24.8% annualized turnover."
+        }
+    ],
+    "evaluation_criteria": {
+        "relevance": "Answer addresses the question using data from the source documents",
+        "accuracy": "Specific numbers and facts match the source documents",
+        "completeness": "All major relevant points are covered",
+        "source_citation": "Sources are properly cited with document names",
+        "actionability": "Insights are framed for leadership decision-making"
+    }
+}

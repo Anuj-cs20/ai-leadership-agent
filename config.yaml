@@ -1,0 +1,19 @@
+# config.yaml — AI Leadership Insight Agent
+
+llm:
+  model: "gpt-4o-mini"      
+  temperature: 0.1
+
+embedding:
+  model: "text-embedding-3-small"  
+
+retrieval:
+  top_k: 10
+  chunk_size: 1024
+  chunk_overlap: 200
+  mmr_threshold: 0.5        # 0.0 = max diversity, 1.0 = pure similarity
+
+chromadb:
+  collection: "company_docs"
+  persist_directory: "./chroma_db"
+  space: "cosine"            # HNSW distance metric: cosine, l2, or ip

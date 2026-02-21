@@ -1,0 +1,54 @@
+{
+  "question": "Which departments are underperforming?",
+  "query_type": "general",
+  "answer": {
+    "summary": "The departments identified as underperforming are Marketing, Customer Support, and HR. Each department has specific metrics indicating significant gaps from their targets, necessitating immediate strategic intervention.",
+    "key_points": [
+      "Marketing scored 58/100 on the Q3 departmental scorecard, significantly below the target of 80, with MQL generation at only 72% of the annual target.",
+      "Customer Support achieved a score of 52/100, falling short of the target CSAT score of 80%, indicating a need for improvement in customer satisfaction.",
+      "HR is experiencing a high turnover rate of 23%, exceeding the target of 15%, alongside the lowest engagement score in five years at 3.2/5.0."
+    ],
+    "evidence": [
+      {
+        "quote": "Marketing scored 58/100 on the Q3 departmental scorecard, the lowest score for this department in 3 years.",
+        "source_document": "strategy_notes.docx",
+        "page_number": null,
+        "section": "Marketing \u2014 Critical Underperformance"
+      },
+      {
+        "quote": "Current State: Organization-wide turnover at 23% vs. 15% target. Engagement score 3.2/5.0, lowest in 5 years.",
+        "source_document": "strategy_notes.docx",
+        "page_number": null,
+        "section": "HR / People \u2014 Structural Issues"
+      },
+      {
+        "quote": "Following the Q3 results review, the executive team has identified three departments requiring immediate strategic intervention: Marketing, Customer Support, and HR.",
+        "source_document": "strategy_notes.docx",
+        "page_number": null,
+        "section": "Summary"
+      }
+    ],
+    "detailed_analysis": null
+  },
+  "sources": [
+    {
+      "document_name": "strategy_notes.docx",
+      "document_type": "strategy",
+      "page_number": null,
+      "section_title": "Marketing \u2014 Critical Underperformance"
+    },
+    {
+      "document_name": "strategy_notes.docx",
+      "document_type": "strategy",
+      "page_number": null,
+      "section_title": "HR / People \u2014 Structural Issues"
+    },
+    {
+      "document_name": "strategy_notes.docx",
+      "document_type": "strategy",
+      "page_number": null,
+      "section_title": "Summary"
+    }
+  ],
+  "visualization": null
+}

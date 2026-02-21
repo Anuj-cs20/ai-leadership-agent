@@ -34,13 +34,14 @@ cd ai-leadership-agent
 pip install -r requirements.txt
 
 # 3. Set your OpenAI API key
-export OPENAI_API_KEY="sk-..."
+cp .env-template .env
+# Edit .env and paste your actual API key
 
 # 4. Open and run the notebook end-to-end
 jupyter notebook notebook.ipynb
 ```
 
-> No additional infrastructure required. The notebook ingests sample documents, runs queries, and produces structured NL reports with charts — all in one place.
+> No additional infrastructure required. On first run, `docling` downloads its layout detection model (~1GB, one-time). The notebook ingests sample documents, runs queries, and produces structured NL reports with charts.
 
 ---
 
@@ -49,7 +50,7 @@ jupyter notebook notebook.ipynb
 | Deliverable | Description |
 |---|---|
 | **`notebook.ipynb`** | End-to-end Jupyter notebook: ingest → query → NL report with charts |
-| **`data/sample/`** | 3-5 sample company documents (public SEC filings + synthetic internal docs) |
+| **`data/sample/`** | 10 sample documents across 5 formats (2 PDF, 2 DOCX, 2 PPTX, 2 XLSX, 2 TXT) |
 | **`data/evaluation/`** | Validation Q&A set with expected answers |
 | **`src/`** | Modular Python source code for all pipeline components |
 | **`config.yaml`** | Single configuration file for model and API key settings |
@@ -63,13 +64,13 @@ jupyter notebook notebook.ipynb
 | Dimension | Choice | Why | Rationale |
 |---|---|---|---|
 | **Document Formats** | PDF, DOCX, PPTX, XLSX/CSV, MD/TXT | Standard corporate formats | Covers all typical organizational document types |
-| **Document Parsing** | `unstructured` | Single library for all formats | Unified API; preserves tables, headers, and lists across formats |
-| **Chunking Strategy** | Recursive text splitting + table-aware | Reliable, well-tested approach | Effective for mixed content; keeps tables as atomic units |
+| **Document Parsing** | `DoclingReader` (LlamaIndex + docling) | AI-based layout detection; superior table extraction | LlamaIndex-native reader wrapping IBM docling; preserves table structure with row/column headers; fallback to pypdf/pandas |
+| **Chunking Strategy** | `MarkdownNodeParser` + `SentenceSplitter` post-pass | Markdown-structure-aware splitting | Splits by headers/tables/sections instead of raw characters; tables kept atomic; oversized text chunks post-split by SentenceSplitter |
 | **Embedding Model** | OpenAI `text-embedding-3-small` (1536d) | No local GPU, consistent quality | High-quality embeddings with minimal setup |
 | **Vector Database** | ChromaDB (in-process) | Zero infrastructure | Runs in-process via `pip install`; no Docker or external server |
 | **LLM** | OpenAI `gpt-4o-mini` (configurable) | Best cost/quality ratio for RAG | Configurable — swap to `gpt-4o` in `config.yaml` for higher quality |
 | **RAG Pattern** | Query rewriting + vector retrieval + structured generation | Proven effective pipeline | Each stage adds measurable value without unnecessary complexity |
-| **Framework** | LangChain (document loaders + splitters + retrieval) | Mature, well-documented | Rich ecosystem of document loaders, text splitters, and retrieval abstractions |
+| **Framework** | LlamaIndex (ingestion + retrieval + generation) | Purpose-built for document QA | Native document readers, node-based chunking, and retrieval abstractions; directly extensible to advanced RAG |
 | **Interface** | Jupyter Notebook | Self-contained, reproducible | Single file runs the full pipeline end-to-end |
 | **Output** | Structured NL report + source citations + Plotly charts | Actionable, evidence-based | Summary, key points, evidence quotes, source traceability, and visualizations |
 | **Sample Data** | Public SEC filings + synthetic internal docs | Realistic, reproducible | Included in repo; no external downloads required |
@@ -85,8 +86,8 @@ graph TB
     end
 
     subgraph INGESTION["📥 Ingestion Pipeline"]
-        DP["Document Parser<br/>(unstructured)<br/>─────────────<br/>• PDF / DOCX / PPTX<br/>• XLSX / CSV<br/>• MD / TXT"]
-        CH["Chunker<br/>─────────────<br/>• Recursive text splitting<br/>• Table-aware<br/>• ~500-800 tokens"]
+        DP["DoclingReader<br/>─────────────<br/>• PDF / DOCX / PPTX<br/>• XLSX / CSV<br/>• MD / TXT<br/>• AI layout detection<br/>• Markdown export"]
+        CH["MarkdownNodeParser<br/>─────────────<br/>• Header-aware splitting<br/>• Tables kept atomic<br/>• SentenceSplitter post-pass"]
         ME["Metadata Extractor<br/>─────────────<br/>• Doc type / date<br/>• Section headers<br/>• Source tracking"]
     end
 
@@ -164,18 +165,18 @@ flowchart LR
         MD["MD/TXT<br/>Internal Notes"]
     end
 
-    subgraph PARSE["⚙️ Parsing (unstructured)"]
+    subgraph PARSE["⚙️ Parsing (DoclingReader)"]
         direction TB
-        P1["Layout Detection<br/>─────────<br/>Headers, Paragraphs,<br/>Tables, Lists"]
-        P2["Table Extraction<br/>─────────<br/>Preserve structure<br/>as markdown tables"]
-        P3["Metadata Extraction<br/>─────────<br/>Title, Date, Author,<br/>Page numbers"]
+        P1["DoclingReader<br/>─────────<br/>LlamaIndex wrapper<br/>around IBM docling<br/>→ Markdown export"]
+        P2["Table Extraction<br/>─────────<br/>Structured tables with<br/>row/column headers<br/>→ Markdown pipe tables"]
+        P3["Metadata Enrichment<br/>─────────<br/>doc_type, year, quarter<br/>Filename classification<br/>Fallback: pypdf / pandas"]
     end
 
     subgraph CHUNK["✂️ Chunking"]
         direction TB
-        C1["Recursive Text Splitter<br/>─────────<br/>Split by paragraphs,<br/>then sentences<br/>~500-800 tokens"]
-        C2["Table Handler<br/>─────────<br/>Keep tables atomic<br/>Add caption context"]
-        C3["Overlap Manager<br/>─────────<br/>~100 token overlap<br/>between chunks"]
+        C1["MarkdownNodeParser<br/>─────────<br/>Split by markdown<br/>structure (headers,<br/>tables, sections)"]
+        C2["Table Handler<br/>─────────<br/>Keep tables atomic<br/>Auto-detected via<br/>pipe-table heuristic"]
+        C3["SentenceSplitter<br/>─────────<br/>Post-pass for oversized<br/>text chunks ~600 tokens<br/>~100 token overlap"]
     end
 
     subgraph ENRICH["🏷️ Metadata"]
@@ -334,14 +335,20 @@ ai-leadership-agent/
 ├── notebook.ipynb                     # ★ End-to-end demo notebook
 ├── config.yaml                        # Model name + API key config
 ├── requirements.txt                   # Python dependencies (pip install only)
+├── .env-template                      # Copy to .env and add your OpenAI API key
 │
 ├── data/
 │   ├── sample/                        # Included sample documents for demo
-│   │   ├── annual_report_2024.pdf     # Public SEC filing
-│   │   ├── q3_quarterly_report.pdf    # Quarterly performance data
-│   │   ├── strategy_notes.docx        # Internal strategy document
-│   │   ├── kpi_dashboard.xlsx         # Financial KPI data
-│   │   └── operational_update.md      # Operational status notes
+│   │   ├── annual_report_2024.pdf     # Annual report with financials & dept performance
+│   │   ├── q3_quarterly_report.pdf    # Q3 performance data & risk updates
+│   │   ├── strategy_notes.docx        # Internal strategy & competitive analysis
+│   │   ├── operational_update.docx    # Operational status & metrics
+│   │   ├── product_roadmap.pptx       # Product roadmap & AI Analytics launch plan
+│   │   ├── quarterly_review_presentation.pptx  # Q3 leadership review deck
+│   │   ├── kpi_dashboard.xlsx         # Financial KPI data (quarterly, dept scores, risks)
+│   │   ├── monthly_metrics.xlsx       # Monthly operational metrics & headcount
+│   │   ├── board_meeting_notes.txt    # Board meeting minutes & resolutions
+│   │   └── executive_directives.txt   # Executive priority directives memo
 │   └── evaluation/                    # Validation Q&A pairs + expected answers
 │       └── validation_set.json
 │
@@ -351,13 +358,13 @@ ai-leadership-agent/
 │   │
 │   ├── ingestion/                     # Document Ingestion Pipeline
 │   │   ├── __init__.py
-│   │   ├── parser.py                  # Document parsing (unstructured)
-│   │   ├── chunker.py                 # Recursive text splitting + table handling
+│   │   ├── parser.py                  # DoclingReader + fallback parsers
+│   │   ├── chunker.py                 # MarkdownNodeParser + SentenceSplitter
 │   │   └── pipeline.py                # Orchestrates full ingestion
 │   │
 │   ├── retrieval/                     # Retrieval
 │   │   ├── __init__.py
-│   │   ├── vector_store.py            # ChromaDB wrapper
+│   │   ├── chromadb.py                # ChromaDB wrapper
 │   │   └── query_processor.py         # Query rewriting
 │   │
 │   ├── generation/                    # Answer Generation
@@ -389,9 +396,10 @@ embedding:
   model: "text-embedding-3-small"      # 1536 dimensions
 
 retrieval:
-  top_k: 5                             # number of chunks to retrieve
-  chunk_size: 600                      # tokens per chunk
-  chunk_overlap: 100                   # overlap between chunks
+  top_k: 10                            # number of chunks to retrieve
+  chunk_size: 1024                     # tokens per chunk
+  chunk_overlap: 200                   # overlap between chunks
+  mmr_threshold: 0.5                   # 0.0 = max diversity, 1.0 = pure similarity
 
 chromadb:
   collection: "company_docs"
@@ -460,7 +468,7 @@ The notebook includes a validation section that runs the system against a curate
 
 ## Assumptions
 
-1. **Documents are text-extractable** — no scanned/OCR PDFs
+1. **Documents are text-extractable** — `docling` includes OCR support, but primary path assumes native text PDFs for speed
 2. **Document scale: 10-50 documents**, up to 200 pages each
 3. **English-only** documents and queries
 4. **OpenAI API access** — a valid API key is required (model is configurable in `config.yaml`)
@@ -480,15 +488,15 @@ The notebook includes a validation section that runs the system against a curate
 | Dimension | Current (Submission) | Future (Production) | Why the change |
 |---|---|---|---|
 | **Document Formats** | PDF, DOCX, PPTX, XLSX/CSV, MD/TXT | PDF, DOCX, PPTX, XLSX/CSV, MD/TXT | |
-| **Document Parsing** | `unstructured` | `unstructured.io` | |
-| **Chunking Strategy** | Recursive text splitting + table-aware | Semantic + Table-aware + Parent-Child | Parent-child gives richer LLM context by retrieving small chunks but passing larger parent sections |
+| **Document Parsing** | `DoclingReader` (LlamaIndex + docling) | `DoclingReader` | LlamaIndex-native integration |
+| **Chunking Strategy** | `MarkdownNodeParser` + `SentenceSplitter` post-pass | Semantic + Table-aware + Parent-Child | Parent-child gives richer LLM context by retrieving small chunks but passing larger parent sections |
 | **Embedding Model** | OpenAI `text-embedding-3-small` (1536d) | **Default:** `BAAI/bge-large-en-v1.5` (local, 1024d)<br/>**Optional:** OpenAI | Local embeddings eliminate API cost and latency; BGE-large matches OpenAI quality |
 | **Vector Database** | ChromaDB (in-process) | Qdrant | Built-in hybrid search (vector + BM25), metadata filtering, scales to millions of vectors |
 | **Re-ranker** | *(none — top-k retrieval)* | `cross-encoder/ms-marco-MiniLM-L-6-v2` | Cross-encoder re-ranking significantly improves precision on top-k results |
 | **Retrieval** | Vector similarity search | Hybrid (Vector + BM25 + RRF) | BM25 catches exact financial terms/numbers that semantic search misses; RRF merges both |
 | **LLM** | OpenAI `gpt-4o-mini` | **Default:** Llama 3.2 3B via Ollama<br/>**Optional:** OpenAI, Anthropic | Fully open-source default; multi-provider adapter for flexibility |
 | **RAG Pattern** | Query rewriting + vector retrieval + structured generation | Advanced RAG (query rewriting + hybrid retrieval + re-ranking + structured generation) | Each added stage measurably improves answer quality |
-| **Framework** | LangChain | LlamaIndex (RAG) + LangGraph (Agent) | LlamaIndex is purpose-built for document QA; LangGraph enables agentic Task 2 workflows |
+| **Framework** | LlamaIndex | LlamaIndex (RAG) + LangGraph (Agent) | Add LangGraph for agentic Task 2 workflows on top of existing LlamaIndex RAG |
 | **Interface** | Jupyter Notebook | Streamlit | Interactive web UI for non-technical leadership users |
 | **Output** | Structured NL report + source citations + Plotly charts | + Confidence scoring | Confidence indicators help leadership gauge answer reliability |
 | **Scope** | Task 1 full | Task 1 + Task 2 (autonomous agent) | LangGraph agent for multi-step reasoning, query decomposition, planning |
@@ -581,7 +589,7 @@ graph TB
     end
 
     subgraph INGESTION["📥 Ingestion Pipeline"]
-        DP["Document Parser<br/>(unstructured.io)<br/>─────────────<br/>• PDF / DOCX / PPTX<br/>• XLSX / CSV<br/>• MD / TXT"]
+        DP["Document Parser<br/>(docling)<br/>─────────────<br/>• PDF / DOCX / PPTX<br/>• XLSX / CSV<br/>• MD / TXT"]
         CHK["Chunker<br/>─────────────<br/>• Semantic splitting<br/>• Table-aware<br/>• Parent-child"]
         EM["Embedder<br/>─────────────<br/>★ BGE-large-en-v1.5 (default)<br/>• 1024 dimensions, local<br/>○ OpenAI embeddings (optional)"]
         ME["Metadata Extractor<br/>─────────────<br/>• Doc type / date<br/>• Section headers<br/>• Department tags"]
@@ -901,7 +909,7 @@ graph LR
 
     subgraph DATA["Data & Storage"]
         QD["⚡ Qdrant<br/>Vector + BM25"]
-        UN["📄 Unstructured.io<br/>Document Parsing"]
+        UN["📄 Docling<br/>Document Parsing"]
     end
 
     subgraph UI_STACK["Interface & Output"]
